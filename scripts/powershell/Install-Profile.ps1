@@ -37,7 +37,7 @@ if ((Test-Path $ProfilePath) -and -not $Force) {
 
 # Install the enhanced profile
 try {
-    $EnhancedProfilePath = Join-Path $PSScriptRoot "enhanced-profile.ps1"
+    $EnhancedProfilePath = Join-Path $PSScriptRoot "scripts\\powershell\\scripts\\powershell\\scripts\\powershell\\enhanced-profile.ps1"
     if (-not (Test-Path $EnhancedProfilePath)) {
         Write-Error "Enhanced profile file not found: $EnhancedProfilePath"
         exit 1

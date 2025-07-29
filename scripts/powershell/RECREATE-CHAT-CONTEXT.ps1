@@ -26,14 +26,14 @@ $sessionFiles = @(
     "PowerShell-DevOps-Hub.code-workspace", 
     "migrate-to-new-repo.ps1",
     "rename-workspace.ps1",
-    "CHAT-CONTEXT-PRESERVATION.md",
+    "docs\\chat-ai\\docs\\chat-ai\\CHAT-CONTEXT-PRESERVATION.md",
     "REBOOT-RECOVERY-GUIDE.md",
     "KIND-WINDOWS-BEST-PRACTICES.md",
     "DOCKER-SETUP.md",
     "KUBERNETES-SETUP.md",
     "WSL2-vs-DOCKER-DESKTOP.md",
     "HOW-TO-CONTINUE.md",
-    "COMPLETE-CHAT-HISTORY-20250728.md"
+    "docs\\chat-ai\\docs\\chat-ai\\COMPLETE-CHAT-HISTORY-20250728.md"
 )
 
 foreach ($file in $sessionFiles) {

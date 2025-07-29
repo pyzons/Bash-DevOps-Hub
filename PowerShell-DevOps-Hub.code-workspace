@@ -42,7 +42,7 @@
                 "args": [
                     "-NoProfile",
                     "-Command",
-                    ". '${workspaceFolder}/enhanced-profile.ps1'"
+                    ". '${workspaceFolder}/scripts/powershell/scripts/powershell/enhanced-profile.ps1'"
                 ],
                 "group": "build",
                 "presentation": {

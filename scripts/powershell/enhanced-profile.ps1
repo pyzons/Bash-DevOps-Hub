@@ -30,7 +30,7 @@ Set-Alias -Name .. -Value 'Set-Location ..'
 Set-Alias -Name ... -Value 'Set-Location ..\..'
 
 # Function to quickly navigate to common directories
-function cdws { Set-Location "c:\app\ws" }
+function cdws { Set-Location "C:\app\PowerShell-DevOps-Hub" }
 function cdprof { Set-Location (Split-Path $PROFILE) }
 
 # Docker aliases and functions for faster workflow
@@ -148,14 +148,15 @@ function kind-dev-setup {
     if ($?) {
         Write-Host "✅ Cluster ready for development!" -ForegroundColor Green
         kgn
-    } else {
+    }
+    else {
         Write-Host "⚠️ Cluster created but still initializing..." -ForegroundColor Yellow
     }
 }
 
 function kind-backup-resources {
     param($namespace = "default")
-    $backupDir = "c:\app\ws\k8s-backups"
+    $backupDir = "C:\app\PowerShell-DevOps-Hub\k8s-backups"
     if (!(Test-Path $backupDir)) { New-Item -ItemType Directory -Path $backupDir -Force }
     
     Write-Host "💾 Backing up Kubernetes resources..." -ForegroundColor Cyan
@@ -171,10 +172,11 @@ function kind-restore-resources {
         Write-Host "🔄 Restoring Kubernetes resources..." -ForegroundColor Cyan
         kap $backupFile
         Write-Host "✅ Resources restored!" -ForegroundColor Green
-    } else {
+    }
+    else {
         Write-Host "❌ Backup file not found: $backupFile" -ForegroundColor Red
         Write-Host "💡 Available backups:" -ForegroundColor Yellow
-        Get-ChildItem "c:\app\ws\k8s-backups" -Filter "*.yaml" | Select-Object Name, LastWriteTime
+        Get-ChildItem "C:\app\PowerShell-DevOps-Hub\k8s-backups" -Filter "*.yaml" | Select-Object Name, LastWriteTime
     }
 }
 
@@ -187,7 +189,8 @@ function kind-cleanup-all {
             kind delete cluster --name $cluster
         }
         Write-Host "✅ All KIND clusters deleted!" -ForegroundColor Green
-    } else {
+    }
+    else {
         Write-Host "✅ No KIND clusters to clean up" -ForegroundColor Green
     }
 }
@@ -198,7 +201,8 @@ function Check-DockerReady {
     if ($dockerReady) {
         Write-Host "✅ Docker is ready (v$dockerReady)" -ForegroundColor Green
         return $true
-    } else {
+    }
+    else {
         Write-Host "❌ Docker is not ready. Please start Docker Desktop." -ForegroundColor Red
         return $false
     }
@@ -209,7 +213,7 @@ function Resume-Work {
     Write-Host ""
     
     # Navigate to workspace
-    Set-Location "c:\app\ws"
+    Set-Location "C:\app\PowerShell-DevOps-Hub"
     Write-Host "📁 Workspace: $(Get-Location)" -ForegroundColor Yellow
     
     # Check Docker
@@ -222,7 +226,8 @@ function Resume-Work {
         if ($gitStatus) {
             Write-Host "⚠️ Uncommitted changes detected" -ForegroundColor Orange
             git status --short
-        } else {
+        }
+        else {
             Write-Host "✅ Git working directory clean" -ForegroundColor Green
         }
         
@@ -233,7 +238,8 @@ function Resume-Work {
         if ($clusters) {
             Write-Host "✅ Active clusters: $($clusters -join ', ')" -ForegroundColor Green
             Write-Host "💡 Run K8s-Status to see details" -ForegroundColor Cyan
-        } else {
+        }
+        else {
             Write-Host "❌ No KIND clusters running" -ForegroundColor Red
             Write-Host "💡 Run kind-dev-setup to create development cluster" -ForegroundColor Cyan
         }
@@ -241,14 +247,15 @@ function Resume-Work {
         # Check backups
         Write-Host ""
         Write-Host "💾 Available Backups:" -ForegroundColor Yellow
-        $backupDir = "c:\app\ws\k8s-backups"
+        $backupDir = "C:\app\PowerShell-DevOps-Hub\k8s-backups"
         if (Test-Path $backupDir) {
             $backups = Get-ChildItem $backupDir -Filter "*.yaml" | Sort-Object LastWriteTime -Descending | Select-Object -First 3
             if ($backups) {
                 foreach ($backup in $backups) {
                     Write-Host "  📄 $($backup.Name) ($(($backup.LastWriteTime).ToString('MM/dd HH:mm')))" -ForegroundColor White
                 }
-            } else {
+            }
+            else {
                 Write-Host "  No backups found" -ForegroundColor Gray
             }
         }
