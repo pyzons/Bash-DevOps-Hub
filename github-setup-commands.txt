@@ -1,0 +1,23 @@
+# GitHub Repository Setup Commands
+# Run these commands after creating your GitHub repository
+
+# Step 1: Add GitHub as remote origin (replace YOUR_USERNAME with your actual GitHub username)
+git remote add origin https://github.com/YOUR_USERNAME/powershell-enhanced-profile.git
+
+# Step 2: Rename branch to main (if not already)
+git branch -M main
+
+# Step 3: Push to GitHub
+git push -u origin main
+
+# After successful push, your repository will be available at:
+# https://github.com/YOUR_USERNAME/powershell-enhanced-profile
+
+# To verify the remote was added correctly:
+# git remote -v
+
+# To check the status after push:
+# git status
+
+# To see the repository online:
+# start https://github.com/YOUR_USERNAME/powershell-enhanced-profile
