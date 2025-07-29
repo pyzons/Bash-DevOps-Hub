@@ -139,6 +139,71 @@ function kind-delete {
 function kind-list { kind get clusters $args }
 function kind-load { kind load docker-image $args }
 
+# Enhanced KIND functions for Windows 11 best practices
+function kind-dev-setup {
+    Write-Host "🚀 Setting up KIND development cluster..." -ForegroundColor Cyan
+    kind-create dev
+    Write-Host "⏱️ Waiting for cluster to be ready..." -ForegroundColor Yellow
+    kubectl wait --for=condition=Ready nodes --all --timeout=60s 2>$null
+    if ($?) {
+        Write-Host "✅ Cluster ready for development!" -ForegroundColor Green
+        kgn
+    } else {
+        Write-Host "⚠️ Cluster created but still initializing..." -ForegroundColor Yellow
+    }
+}
+
+function kind-backup-resources {
+    param($namespace = "default")
+    $backupDir = "c:\app\ws\k8s-backups"
+    if (!(Test-Path $backupDir)) { New-Item -ItemType Directory -Path $backupDir -Force }
+    
+    Write-Host "💾 Backing up Kubernetes resources..." -ForegroundColor Cyan
+    $backupFile = "$backupDir\all-resources-$(Get-Date -Format 'yyyyMMdd-HHmm').yaml"
+    kubectl get all -n $namespace -o yaml > $backupFile
+    Write-Host "✅ Resources backed up to $backupFile" -ForegroundColor Green
+    return $backupFile
+}
+
+function kind-restore-resources {
+    param($backupFile)
+    if (Test-Path $backupFile) {
+        Write-Host "🔄 Restoring Kubernetes resources..." -ForegroundColor Cyan
+        kap $backupFile
+        Write-Host "✅ Resources restored!" -ForegroundColor Green
+    } else {
+        Write-Host "❌ Backup file not found: $backupFile" -ForegroundColor Red
+        Write-Host "💡 Available backups:" -ForegroundColor Yellow
+        Get-ChildItem "c:\app\ws\k8s-backups" -Filter "*.yaml" | Select-Object Name, LastWriteTime
+    }
+}
+
+function kind-cleanup-all {
+    Write-Host "🧹 Cleaning up all KIND clusters..." -ForegroundColor Yellow
+    $clusters = kind get clusters 2>$null
+    if ($clusters) {
+        foreach ($cluster in $clusters) {
+            Write-Host "  Deleting cluster: $cluster" -ForegroundColor Gray
+            kind delete cluster --name $cluster
+        }
+        Write-Host "✅ All KIND clusters deleted!" -ForegroundColor Green
+    } else {
+        Write-Host "✅ No KIND clusters to clean up" -ForegroundColor Green
+    }
+}
+
+function Check-DockerReady {
+    Write-Host "🔍 Checking Docker status..." -ForegroundColor Cyan
+    $dockerReady = docker info --format "{{.ServerVersion}}" 2>$null
+    if ($dockerReady) {
+        Write-Host "✅ Docker is ready (v$dockerReady)" -ForegroundColor Green
+        return $true
+    } else {
+        Write-Host "❌ Docker is not ready. Please start Docker Desktop." -ForegroundColor Red
+        return $false
+    }
+}
+
 # Advanced Kubernetes functions
 function Show-KubernetesAliases {
     Write-Host "Available Kubernetes & KIND Aliases:" -ForegroundColor Green
@@ -160,22 +225,36 @@ function Show-KubernetesAliases {
     Write-Host "kdel    - kubectl delete" -ForegroundColor White
     Write-Host ""
     Write-Host "KIND Commands:" -ForegroundColor Yellow
-    Write-Host "kind-create  - Create KIND cluster" -ForegroundColor White
-    Write-Host "kind-delete  - Delete KIND cluster" -ForegroundColor White
-    Write-Host "kind-list    - List KIND clusters" -ForegroundColor White
-    Write-Host "kind-load    - Load Docker image into KIND" -ForegroundColor White
+    Write-Host "kind-create         - Create KIND cluster" -ForegroundColor White
+    Write-Host "kind-delete         - Delete KIND cluster" -ForegroundColor White
+    Write-Host "kind-list           - List KIND clusters" -ForegroundColor White
+    Write-Host "kind-load           - Load Docker image into KIND" -ForegroundColor White
+    Write-Host ""
+    Write-Host "Enhanced KIND Functions:" -ForegroundColor Yellow
+    Write-Host "kind-dev-setup      - Create development cluster with readiness check" -ForegroundColor White
+    Write-Host "kind-backup-resources - Backup cluster resources to file" -ForegroundColor White
+    Write-Host "kind-restore-resources - Restore resources from backup file" -ForegroundColor White
+    Write-Host "kind-cleanup-all    - Delete all KIND clusters" -ForegroundColor White
+    Write-Host "Check-DockerReady   - Verify Docker Desktop is running" -ForegroundColor White
 }
 
 function K8s-QuickStart {
-    Write-Host "🚀 Kubernetes Quick Start with KIND" -ForegroundColor Cyan
-    Write-Host "====================================" -ForegroundColor Cyan
+    Write-Host "🚀 Kubernetes Quick Start with KIND (Windows 11)" -ForegroundColor Cyan
+    Write-Host "===============================================" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "1. Create cluster: kind-create my-cluster" -ForegroundColor Yellow
-    Write-Host "2. Check nodes:    kgn" -ForegroundColor Yellow
-    Write-Host "3. Deploy app:     kap deployment.yaml" -ForegroundColor Yellow
-    Write-Host "4. Check pods:     kgp" -ForegroundColor Yellow
-    Write-Host "5. View services:  kgs" -ForegroundColor Yellow
-    Write-Host "6. Clean up:       kind-delete my-cluster" -ForegroundColor Yellow
+    Write-Host "Daily Workflow:" -ForegroundColor Yellow
+    Write-Host "1. Check Docker:   Check-DockerReady" -ForegroundColor White
+    Write-Host "2. Setup cluster:  kind-dev-setup" -ForegroundColor White
+    Write-Host "3. Deploy app:     kap deployment.yaml" -ForegroundColor White
+    Write-Host "4. Check status:   K8s-Status" -ForegroundColor White
+    Write-Host "5. Backup work:    kind-backup-resources" -ForegroundColor White
+    Write-Host ""
+    Write-Host "After Reboot:" -ForegroundColor Yellow
+    Write-Host "1. Wait for Docker Desktop to start" -ForegroundColor White
+    Write-Host "2. Run: kind-dev-setup" -ForegroundColor White
+    Write-Host "3. Restore: kind-restore-resources backup-file.yaml" -ForegroundColor White
+    Write-Host ""
+    Write-Host "💡 KIND clusters are ephemeral - they don't survive reboots!" -ForegroundColor Cyan
 }
 
 function K8s-Status {
@@ -204,3 +283,5 @@ Write-Host "• Show-GitAliases        - Git shortcuts" -ForegroundColor Gray
 Write-Host "• Show-DockerAliases     - Docker commands" -ForegroundColor Gray
 Write-Host "• Show-KubernetesAliases - Kubernetes & KIND shortcuts" -ForegroundColor Gray
 Write-Host "• K8s-QuickStart         - Kubernetes quick start guide" -ForegroundColor Gray
+Write-Host "• Check-DockerReady      - Verify Docker status" -ForegroundColor Gray
+Write-Host "• kind-dev-setup         - Create development cluster" -ForegroundColor Gray
