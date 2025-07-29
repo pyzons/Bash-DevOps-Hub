@@ -111,6 +111,86 @@ function Docker-Stats {
     docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"
 }
 
+# Kubernetes and KIND aliases
+Set-Alias -Name k -Value kubectl
+function kgp { kubectl get pods $args }
+function kgs { kubectl get services $args }
+function kgd { kubectl get deployments $args }
+function kgn { kubectl get nodes $args }
+function kga { kubectl get all $args }
+function kdp { kubectl describe pod $args }
+function kds { kubectl describe service $args }
+function kdd { kubectl describe deployment $args }
+function kl { kubectl logs $args }
+function klf { kubectl logs -f $args }
+function kex { kubectl exec -it $args }
+function kap { kubectl apply -f $args }
+function kdel { kubectl delete $args }
+
+# KIND-specific functions
+function kind-create { 
+    param($name = "kind")
+    kind create cluster --name $name $args 
+}
+function kind-delete { 
+    param($name = "kind")
+    kind delete cluster --name $name $args 
+}
+function kind-list { kind get clusters $args }
+function kind-load { kind load docker-image $args }
+
+# Advanced Kubernetes functions
+function Show-KubernetesAliases {
+    Write-Host "Available Kubernetes & KIND Aliases:" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "Basic Kubectl Commands:" -ForegroundColor Yellow
+    Write-Host "k       - kubectl" -ForegroundColor White
+    Write-Host "kgp     - kubectl get pods" -ForegroundColor White
+    Write-Host "kgs     - kubectl get services" -ForegroundColor White
+    Write-Host "kgd     - kubectl get deployments" -ForegroundColor White
+    Write-Host "kgn     - kubectl get nodes" -ForegroundColor White
+    Write-Host "kga     - kubectl get all" -ForegroundColor White
+    Write-Host "kdp     - kubectl describe pod" -ForegroundColor White
+    Write-Host "kds     - kubectl describe service" -ForegroundColor White
+    Write-Host "kdd     - kubectl describe deployment" -ForegroundColor White
+    Write-Host "kl      - kubectl logs" -ForegroundColor White
+    Write-Host "klf     - kubectl logs -f" -ForegroundColor White
+    Write-Host "kex     - kubectl exec -it" -ForegroundColor White
+    Write-Host "kap     - kubectl apply -f" -ForegroundColor White
+    Write-Host "kdel    - kubectl delete" -ForegroundColor White
+    Write-Host ""
+    Write-Host "KIND Commands:" -ForegroundColor Yellow
+    Write-Host "kind-create  - Create KIND cluster" -ForegroundColor White
+    Write-Host "kind-delete  - Delete KIND cluster" -ForegroundColor White
+    Write-Host "kind-list    - List KIND clusters" -ForegroundColor White
+    Write-Host "kind-load    - Load Docker image into KIND" -ForegroundColor White
+}
+
+function K8s-QuickStart {
+    Write-Host "🚀 Kubernetes Quick Start with KIND" -ForegroundColor Cyan
+    Write-Host "====================================" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "1. Create cluster: kind-create my-cluster" -ForegroundColor Yellow
+    Write-Host "2. Check nodes:    kgn" -ForegroundColor Yellow
+    Write-Host "3. Deploy app:     kap deployment.yaml" -ForegroundColor Yellow
+    Write-Host "4. Check pods:     kgp" -ForegroundColor Yellow
+    Write-Host "5. View services:  kgs" -ForegroundColor Yellow
+    Write-Host "6. Clean up:       kind-delete my-cluster" -ForegroundColor Yellow
+}
+
+function K8s-Status {
+    Write-Host "☸️ Kubernetes Cluster Status:" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "🖥️ Current Context:" -ForegroundColor Yellow
+    kubectl config current-context
+    Write-Host ""
+    Write-Host "🏗️ Nodes:" -ForegroundColor Yellow
+    kubectl get nodes
+    Write-Host ""
+    Write-Host "🏃 All Resources:" -ForegroundColor Yellow
+    kubectl get all
+}
+
 # Enhanced prompt (optional - remove if you use Oh My Posh)
 function prompt {
     $location = Get-Location
@@ -118,5 +198,9 @@ function prompt {
     "PS $location$gitInfo> "
 }
 
-Write-Host "PowerShell 7 Profile with Docker Integration Loaded!" -ForegroundColor Green
-Write-Host "💡 Type 'Show-GitAliases' for Git shortcuts or 'Show-DockerAliases' for Docker commands." -ForegroundColor Cyan
+Write-Host "PowerShell 7 with Docker & Kubernetes Integration Loaded!" -ForegroundColor Green
+Write-Host "💡 Available commands:" -ForegroundColor Cyan
+Write-Host "• Show-GitAliases        - Git shortcuts" -ForegroundColor Gray
+Write-Host "• Show-DockerAliases     - Docker commands" -ForegroundColor Gray
+Write-Host "• Show-KubernetesAliases - Kubernetes & KIND shortcuts" -ForegroundColor Gray
+Write-Host "• K8s-QuickStart         - Kubernetes quick start guide" -ForegroundColor Gray
