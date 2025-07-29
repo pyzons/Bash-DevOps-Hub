@@ -1,0 +1,52 @@
+# PowerShell and Windows specific files
+*.ps1xml
+*.ps1.bak
+*.ps1.old
+*.backup.*
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# Log files
+*.log
+*.logs
+
+# VS Code settings (keep workspace-specific settings private)
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Mac files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# PowerShell execution policy bypass files
+*.ps1.txt
+
+# Sensitive information
+*secret*
+*password*
+*credential*
+*key*
+!*.pub
+
+# Personal profile backups
+*profile*.backup*
+Microsoft.PowerShell_profile.ps1.backup*
+
+# Ignore test directories
+test-repo/
