@@ -152,7 +152,7 @@ Instead of re-explaining, reference the docs we created:
 ## 🚀 **Immediate Action Items**
 
 1. **Export this chat** using right-click → Export
-2. **Save to workspace**: `c:\app\ws\chat-context-powershell-setup.md`
+2. **Save to workspace**: `c:\app\PowerShell-DevOps-Hub\chat-context-powershell-setup.md`
 3. **Create bookmark**: Reference our repository in new chats
 4. **Use Resume-Work**: Always paste its output for environment context
 
