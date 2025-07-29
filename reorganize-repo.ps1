@@ -33,14 +33,14 @@ if (!$DryRun) {
 # Define the reorganization plan
 $reorganizationPlan = @{
     # Documentation files
-    "docs/chat-ai/"       = @(
+    "docs/chat-ai/" = @(
         "CHAT-CONTEXT-PRESERVATION.md",
         "CHAT-SESSION-SUMMARY.md", 
         "COMPLETE-CHAT-HISTORY-20250728.md",
         "EXTRACT-CHAT-METHODS.md",
         "SCREENSHOT-BACKUP-METHOD.md"
     )
-    "docs/setup/"         = @(
+    "docs/setup/" = @(
         "DOCKER-SETUP.md",
         "KUBERNETES-SETUP.md",
         "KIND-WINDOWS-BEST-PRACTICES.md",
@@ -50,12 +50,12 @@ $reorganizationPlan = @{
     )
     
     # Configuration files
-    "config/docker/"      = @(
+    "config/docker/" = @(
         "docker-compose.example.yml",
         "Dockerfile.example",
         ".dockerignore.example"
     )
-    "config/kubernetes/"  = @(
+    "config/kubernetes/" = @(
         "kind-dev-config.yaml",
         "kind-prod-config.yaml"
     )
@@ -69,11 +69,11 @@ $reorganizationPlan = @{
         "test_profile.ps1",
         "RECREATE-CHAT-CONTEXT.ps1"
     )
-    "scripts/migration/"  = @(
+    "scripts/migration/" = @(
         "migrate-to-new-repo.ps1",
         "rename-workspace.ps1"
     )
-    "scripts/setup/"      = @(
+    "scripts/setup/" = @(
         "github-setup-commands.txt"
     )
 }
@@ -95,8 +95,7 @@ function Show-Plan {
         foreach ($file in $reorganizationPlan[$targetDir]) {
             if (Test-Path $file) {
                 Write-Host "    📄 $file" -ForegroundColor White
-            }
-            else {
+            } else {
                 Write-Host "    ❌ $file (not found)" -ForegroundColor Red
             }
         }
@@ -106,8 +105,7 @@ function Show-Plan {
     foreach ($file in $keepInRoot) {
         if (Test-Path $file) {
             Write-Host "    📄 $file" -ForegroundColor White
-        }
-        else {
+        } else {
             Write-Host "    ❌ $file (not found)" -ForegroundColor Red
         }
     }
@@ -152,12 +150,10 @@ foreach ($targetDir in $reorganizationPlan.Keys) {
                 Move-Item $file -Destination $targetDir -Force
                 Write-Host "  ✅ Moved: $file → $targetDir" -ForegroundColor Green
                 $totalMoved++
-            }
-            catch {
+            } catch {
                 Write-Host "  ❌ Failed to move $file : $_" -ForegroundColor Red
             }
-        }
-        else {
+        } else {
             Write-Host "  ⚠️ File not found: $file" -ForegroundColor Yellow
         }
     }

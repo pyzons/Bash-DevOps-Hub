@@ -1,92 +1,60 @@
 {
-    "folders": [
-        {
-            "name": "PowerShell DevOps Hub",
-            "path": "."
-        }
-    ],
-    "settings": {
-        "powershell.powerShellDefaultVersion": "PowerShell 7",
-        "terminal.integrated.defaultProfile.windows": "PowerShell 7",
-        "files.defaultLanguage": "powershell",
-        "git.enableSmartCommit": true,
-        "git.confirmSync": false,
-        "editor.formatOnSave": true,
-        "editor.tabSize": 4,
-        "files.autoSave": "afterDelay",
-        "files.autoSaveDelay": 1000,
-        "workbench.startupEditor": "readme",
-        "explorer.confirmDelete": false,
-        "explorer.confirmDragAndDrop": false
-    },
-    "extensions": {
-        "recommendations": [
-            "ms-vscode.powershell",
-            "ms-azuretools.vscode-docker",
-            "ms-kubernetes-tools.vscode-kubernetes-tools",
-            "ms-vscode-remote.remote-containers",
-            "ms-vscode-remote.remote-wsl",
-            "redhat.vscode-yaml",
-            "ms-vscode.vscode-json",
-            "github.copilot",
-            "github.copilot-chat"
-        ]
-    },
-    "tasks": {
-        "version": "2.0.0",
-        "tasks": [
-            {
-                "label": "Load PowerShell Profile",
-                "type": "shell",
-                "command": "powershell",
-                "args": [
-                    "-NoProfile",
-                    "-Command",
-                    ". '${workspaceFolder}/scripts/powershell/scripts/powershell/enhanced-profile.ps1'"
-                ],
-                "group": "build",
-                "presentation": {
-                    "echo": true,
-                    "reveal": "always",
-                    "focus": false,
-                    "panel": "shared"
-                },
-                "problemMatcher": []
-            },
-            {
-                "label": "Check Environment Status",
-                "type": "shell",
-                "command": "powershell",
-                "args": [
-                    "-Command",
-                    "Resume-Work"
-                ],
-                "group": "test",
-                "presentation": {
-                    "echo": true,
-                    "reveal": "always",
-                    "focus": false,
-                    "panel": "shared"
-                },
-                "problemMatcher": []
-            },
-            {
-                "label": "Setup KIND Development Cluster",
-                "type": "shell",
-                "command": "powershell",
-                "args": [
-                    "-Command",
-                    "kind-dev-setup"
-                ],
-                "group": "build",
-                "presentation": {
-                    "echo": true,
-                    "reveal": "always",
-                    "focus": true,
-                    "panel": "shared"
-                },
-                "problemMatcher": []
-            }
-        ]
-    }
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"terminal.integrated.defaultProfile.windows": "PowerShell 7",
+		"terminal.integrated.profiles.windows": {
+			"PowerShell 7": {
+				"path": "pwsh.exe",
+				"icon": "terminal-powershell",
+				"args": [
+					"-NoLogo",
+					"-NoExit"
+				]
+			},
+			"PowerShell": {
+				"source": "PowerShell",
+				"icon": "terminal-powershell"
+			}
+		},
+		"terminal.integrated.shellIntegration.enabled": true,
+		"terminal.integrated.enablePersistentSessions": true,
+		"terminal.integrated.persistentSessionReviveProcess": "onExit",
+		"terminal.integrated.rightClickBehavior": "copyPaste",
+		"terminal.integrated.cursorBlinking": true,
+		"terminal.integrated.cursorStyle": "line",
+		"terminal.integrated.fontFamily": "Cascadia Code, Consolas, 'Courier New', monospace",
+		"terminal.integrated.fontSize": 14,
+		"terminal.integrated.lineHeight": 1.2,
+		"powershell.powerShellDefaultVersion": "PowerShell 7",
+		"powershell.integratedConsole.showOnStartup": false,
+		"powershell.integratedConsole.suppressStartupBanner": true,
+		"powershell.enableProfileLoading": true,
+		"powershell.promptToUpdatePowerShell": false,
+		"powershell.codeFormatting.preset": "OTBS",
+		"powershell.codeFormatting.openBraceOnSameLine": true,
+		"powershell.codeFormatting.newLineAfterOpenBrace": true,
+		"powershell.codeFormatting.newLineAfterCloseBrace": true,
+		"powershell.codeFormatting.whitespaceBeforeOpenBrace": true,
+		"powershell.codeFormatting.whitespaceBeforeOpenParen": true,
+		"powershell.codeFormatting.whitespaceAroundOperator": true,
+		"powershell.codeFormatting.whitespaceAfterSeparator": true,
+		"powershell.codeFormatting.ignoreOneLineBlock": true,
+		"powershell.scriptAnalysis.enable": true,
+		"powershell.scriptAnalysis.settingsPath": "",
+		"powershell.debugging.createTemporaryIntegratedConsole": false,
+		"files.associations": {
+			"*.ps1": "powershell",
+			"*.psm1": "powershell",
+			"*.psd1": "powershell"
+		},
+		"files.defaultLanguage": "powershell",
+		"git.confirmSync": false,
+		"git.showPushSuccessNotification": true,
+		"git.terminalAuthentication": true,
+		"merge-conflict.autoNavigateNextConflict.enabled": true
+	}
 }

@@ -33,6 +33,27 @@ Set-Alias -Name ... -Value 'Set-Location ..\..'
 function cdws { Set-Location "C:\app\PowerShell-DevOps-Hub" }
 function cdprof { Set-Location (Split-Path $PROFILE) }
 
+# Function to show available Git aliases
+function Show-GitAliases {
+    Write-Host "Available Git Aliases:" -ForegroundColor Green
+    Write-Host "Basic Git Commands:" -ForegroundColor Yellow
+    Write-Host "g      - git" -ForegroundColor White
+    Write-Host "gs     - git status" -ForegroundColor White
+    Write-Host "ga     - git add" -ForegroundColor White
+    Write-Host "gc     - git commit" -ForegroundColor White
+    Write-Host "gp     - git push" -ForegroundColor White
+    Write-Host "gl     - git log --oneline" -ForegroundColor White
+    Write-Host "gd     - git diff" -ForegroundColor White
+    Write-Host "gb     - git branch" -ForegroundColor White
+    Write-Host "gco    - git checkout" -ForegroundColor White
+    Write-Host ""
+    Write-Host "💡 Usage Examples:" -ForegroundColor Cyan
+    Write-Host "gs              - Show status" -ForegroundColor Gray
+    Write-Host "ga .            - Add all files" -ForegroundColor Gray
+    Write-Host "gc -m 'message' - Commit with message" -ForegroundColor Gray
+    Write-Host "gp origin main  - Push to main branch" -ForegroundColor Gray
+}
+
 # Docker aliases and functions for faster workflow
 Set-Alias -Name d -Value docker
 function dps { docker ps $args }
