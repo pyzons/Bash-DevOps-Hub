@@ -17,10 +17,10 @@ code --install-extension ms-vscode.vscode-json           # JSON support
 code --install-extension formulahendry.auto-rename-tag   # HTML tag management
 ```
 
-## PowerShell Docker Aliases (Now Available!)
+## Bash Docker Aliases (Now Available!)
 
 ### Basic Docker Commands
-```powershell
+```bash
 d        # docker
 dps      # docker ps (running containers)
 dpsa     # docker ps -a (all containers)
@@ -40,7 +40,7 @@ dprune   # docker system prune (cleanup)
 ```
 
 ### Docker Compose Commands
-```powershell
+```bash
 dc         # docker-compose
 dcup       # docker-compose up
 dcupd      # docker-compose up -d (detached)
@@ -54,16 +54,15 @@ dcrestart  # docker-compose restart
 ```
 
 ### Special Functions
-```powershell
-Show-DockerAliases  # Display all Docker aliases
-Docker-Stats        # Show Docker system info and running containers
-Docker-CleanAll     # Clean up all Docker resources (images, containers, volumes)
+```bash
+show-docker-aliases  # Display all Docker aliases
+sysinfo             # Show system info including Docker status
 ```
 
 ## Quick Start Examples
 
 ### 1. Run a Simple Web Server
-```powershell
+```bash
 # Pull and run nginx
 drun -d -p 8080:80 --name my-nginx nginx
 
@@ -79,7 +78,7 @@ drm my-nginx
 ```
 
 ### 2. Development with Docker Compose
-```powershell
+```bash
 # Start services in background
 dcupd
 
@@ -94,7 +93,7 @@ dcdown
 ```
 
 ### 3. Interactive Development
-```powershell
+```bash
 # Run interactive Ubuntu container
 drun -it ubuntu bash
 

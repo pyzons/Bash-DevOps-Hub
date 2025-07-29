@@ -1,155 +1,108 @@
-# 🚀 Enhanced PowerShell 7 Profile Setup
+# 🚀 Bash DevOps Hub
 
-A comprehensive PowerShell 7 profile configuration with Oh My Posh integration, advanced Git aliases, and optimized development experience.
+A comprehensive, well-organized Bash development environment with Git, Docker, and Kubernetes integration.
 
-## ✨ Features
-
-### 🎨 Visual Enhancements
-- **Oh My Posh** integration with custom themes
-- **Colorized syntax** highlighting for commands, parameters, and variables
-- **Predictive text** with history-based suggestions
-- **Beautiful prompt** with Git status integration
-
-### ⚡ Enhanced Completion & Navigation
-- **Advanced PSReadLine** configuration
-- **Intelligent tab completion** with menu display
-- **History-based predictions** and search
-- **Smart key bindings** for efficient editing
-
-### 🔧 Git Integration
-- **Comprehensive Git aliases** for faster workflow
-- **Visual Git status** in prompt
-- **Quick Git commands**: `gs`, `ga`, `gc`, `gp`, `glog`, etc.
-- **Branch management** shortcuts
-
-### 📁 Productivity Shortcuts
-- **Directory navigation**: `ll`, `la`, `..`, `...`
-- **Quick workspace access**: `cdws`, `cdprof`
-- **Alias overview**: `Show-GitAliases`
-
-## 🛠️ Installation
-
-### Prerequisites
-- PowerShell 7.x
-- Git
-- Oh My Posh (optional but recommended)
-
-### Quick Setup
-1. Clone this repository
-2. Copy the profile content to your PowerShell profile location
-3. Restart PowerShell or run `. $PROFILE`
-
-### Manual Installation
-```powershell
-# Copy the enhanced profile to your PowerShell profile
-Get-Content "enhanced-profile.ps1" | Add-Content $PROFILE
-
-# Reload the profile
-. $PROFILE
-```
-
-## 📋 Available Git Aliases
-
-| Alias | Command | Description |
-|-------|---------|-------------|
-| `g` | `git` | Short git command |
-| `gs` | `git status` | Check repository status |
-| `ga` | `git add` | Add files to staging |
-| `gaa` | `git add --all` | Add all files to staging |
-| `gc` | `git commit` | Commit changes |
-| `gca` | `git commit --amend` | Amend last commit |
-| `gp` | `git push` | Push to remote |
-| `gl` | `git pull` | Pull from remote |
-| `gco` | `git checkout` | Switch branches |
-| `gb` | `git branch` | List/manage branches |
-| `gm` | `git merge` | Merge branches |
-| `gd` | `git diff` | Show differences |
-| `glog` | `git log --oneline --graph` | Visual commit history |
-
-## 🎯 Key Features
-
-### PSReadLine Configuration
-- **Prediction Source**: History-based intelligent suggestions
-- **ListView**: Enhanced completion menu
-- **Smart Navigation**: Ctrl+Left/Right for word jumping
-- **History Search**: Up/Down arrows for contextual search
-
-### Color Scheme
-- **Commands**: Yellow
-- **Parameters**: Green
-- **Variables**: White
-- **Strings**: Blue
-- **Comments**: Dark Green
-- **Predictions**: Dark Gray
-
-## 📁 Repository Structure
+## 🏗️ Project Structure
 
 ```
-├── README.md                           # This file
-├── enhanced-profile.ps1                # Main PowerShell profile
-├── Install-Profile.ps1                 # Installation script
-├── Microsoft.PowerShell_profile.ps1    # Profile template
-└── setup-omp.ps1                      # Oh My Posh setup script
+├── 01-installation/              # Installation & Setup
+│   ├── installers/              # Main installation scripts
+│   ├── scripts/                 # Installation components
+│   └── docs/                    # Installation documentation
+├── 02-bash-profile/             # Bash Profile & Configuration
+│   ├── profile/                 # Main enhanced bash profile
+│   ├── configs/                 # Additional configurations
+│   └── tests/                   # Profile testing utilities
+├── 03-prompt-theming/           # Prompt & Theming
+│   ├── starship/                # Starship prompt setup
+│   └── configs/                 # Custom themes and configs
+├── 04-dev-tools/                # Development Tools & Utilities
+│   ├── analysis/                # Profile analysis tools
+│   └── utilities/               # Development utilities
+├── 05-docker-integration/       # Docker Integration
+│   ├── configs/                 # Docker configurations
+│   ├── examples/                # Example setups
+│   └── docs/                    # Docker documentation
+├── 06-kubernetes-integration/   # Kubernetes Integration
+│   ├── configs/                 # Kubernetes configurations
+│   ├── kind/                    # KIND cluster configs
+│   └── docs/                    # Kubernetes documentation
+├── 07-documentation/            # Documentation & Guides
+│   ├── setup-guides/            # Setup and continuation guides
+│   ├── troubleshooting/         # Recovery and troubleshooting
+│   └── chat-ai/                 # AI chat context preservation
+├── 08-legacy-archive/           # Legacy Archive
+│   └── powershell-legacy/       # Archived PowerShell files
+└── README.md                    # This file
 ```
 
-## 🚀 Usage Examples
+## 🚀 Quick Start
 
-```powershell
-# Quick Git workflow
-gs                    # Check status
-ga .                  # Add all files
-gc "feat: new feature" # Commit with message
-gp                    # Push to remote
+1. **Install the enhanced bash profile:**
+   ```bash
+   cd 01-installation/installers
+   ./install-no-hang.sh
+   ```
 
-# Navigation shortcuts
-cdws                  # Go to workspace
-ll                    # List files (detailed)
-la                    # List all files (including hidden)
+2. **Restart your terminal or:**
+   ```bash
+   source ~/.bashrc
+   ```
 
-# View all Git aliases
-Show-GitAliases
-```
+3. **Test the installation:**
+   ```bash
+   gs          # Git status
+   ll          # List files
+   show-git-aliases  # See all shortcuts
+   ```
 
-## 🔧 Customization
+## 📋 Sub-Projects Overview
 
-### Adding Custom Aliases
-```powershell
-# Add to your profile
-function myalias { your-command $args }
-Set-Alias -Name alias -Value your-command
-```
+### 🚀 [01-installation](01-installation/)
+Installation scripts and setup procedures for the Bash DevOps Hub.
 
-### Changing Oh My Posh Theme
-```powershell
-# Replace the theme in enhanced-profile.ps1
-oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/your-theme.omp.json" | Invoke-Expression
-```
+### 🐚 [02-bash-profile](02-bash-profile/)
+Enhanced bash profile with 50+ aliases and functions for productivity.
+
+### ⭐ [03-prompt-theming](03-prompt-theming/)
+Modern terminal prompt with Starship integration and custom themes.
+
+### 🔧 [04-dev-tools](04-dev-tools/)
+Development tools and utilities for maintaining and analyzing the setup.
+
+### 🐳 [05-docker-integration](05-docker-integration/)
+Docker integration with aliases, functions, and container management.
+
+### ☸️ [06-kubernetes-integration](06-kubernetes-integration/)
+Kubernetes and KIND integration for container orchestration.
+
+### 📚 [07-documentation](07-documentation/)
+Comprehensive guides, troubleshooting, and documentation.
+
+### 🗄️ [08-legacy-archive](08-legacy-archive/)
+Archived files from previous versions and migrations.
+
+## ✨ Key Features
+
+- **50+ Git aliases** for faster workflow
+- **Docker integration** with container management
+- **Kubernetes shortcuts** for cluster operations
+- **Starship prompt** with modern themes
+- **System utilities** for enhanced productivity
+- **Comprehensive documentation** for all features
+- **Modular organization** by sub-projects
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test the profile configuration
-5. Submit a pull request
+1. Choose the relevant sub-project directory
+2. Follow the structure and documentation patterns
+3. Test your changes with the provided utilities
+4. Update documentation as needed
 
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 👤 Author
-
-**Sekhar Valalla**
-- Email: pyzons@gmail.com
-- GitHub: [@your-username](https://github.com/your-username)
-
-## 🙏 Acknowledgments
-
-- PowerShell team for the amazing shell
-- Oh My Posh for beautiful prompts
-- PSReadLine for enhanced editing experience
-- Git for version control excellence
-
 ---
 
-⭐ **Star this repository if it helped improve your PowerShell experience!**
+⭐ **Star this repository if it improved your bash development experience!**

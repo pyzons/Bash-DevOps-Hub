@@ -1,0 +1,129 @@
+{
+	"folders": [
+		{
+			"name": "🚀 Bash DevOps Hub",
+			"path": "."
+		},
+		{
+			"name": "📜 Bash Scripts",
+			"path": "./scripts/bash"
+		},
+		{
+			"name": "📚 Documentation",
+			"path": "./docs"
+		},
+		{
+			"name": "⚙️ Configuration",
+			"path": "./config"
+		}
+	],
+	"settings": {
+		"files.defaultLanguage": "shellscript",
+		"files.associations": {
+			"*.sh": "shellscript",
+			"*.bash": "shellscript",
+			".bashrc": "shellscript",
+			".bash_profile": "shellscript",
+			".bash_aliases": "shellscript",
+			".profile": "shellscript"
+		},
+		"terminal.integrated.defaultProfile.linux": "bash",
+		"terminal.integrated.profiles.linux": {
+			"bash": {
+				"path": "/bin/bash",
+				"args": ["--login"]
+			}
+		},
+		"terminal.integrated.shellIntegration.enabled": true,
+		"terminal.integrated.enablePersistentSessions": true,
+		"terminal.integrated.rightClickBehavior": "copyPaste",
+		"terminal.integrated.cursorBlinking": true,
+		"terminal.integrated.cursorStyle": "line",
+		"terminal.integrated.fontFamily": "Cascadia Code, 'JetBrains Mono', 'Fira Code', Consolas, monospace",
+		"terminal.integrated.fontSize": 14,
+		"terminal.integrated.lineHeight": 1.2,
+		"git.confirmSync": false,
+		"git.showPushSuccessNotification": true,
+		"git.terminalAuthentication": true,
+		"merge-conflict.autoNavigateNextConflict.enabled": true,
+		"shellcheck.enable": true,
+		"shellcheck.executablePath": "shellcheck",
+		"shellformat.path": "shfmt"
+	},
+	"extensions": {
+		"recommendations": [
+			"timonwong.shellcheck",
+			"foxundermoon.shell-format", 
+			"rogalmic.bash-debug",
+			"ms-azuretools.vscode-docker",
+			"ms-kubernetes-tools.vscode-kubernetes-tools",
+			"redhat.vscode-yaml",
+			"ms-vscode.vscode-json"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Install Enhanced Profile",
+				"type": "shell",
+				"command": "./install-enhanced-profile.sh",
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				},
+				"options": {
+					"cwd": "${workspaceFolder}"
+				}
+			},
+			{
+				"label": "Test Profile",
+				"type": "shell",
+				"command": "./scripts/bash/test-profile.sh",
+				"group": "test",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				},
+				"options": {
+					"cwd": "${workspaceFolder}"
+				}
+			},
+			{
+				"label": "Analyze Profile",
+				"type": "shell",
+				"command": "./analyze-profile.sh",
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				},
+				"options": {
+					"cwd": "${workspaceFolder}"
+				}
+			},
+			{
+				"label": "Setup Starship Prompt",
+				"type": "shell",
+				"command": "./scripts/bash/setup-starship.sh",
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				},
+				"options": {
+					"cwd": "${workspaceFolder}"
+				}
+			}
+		]
+	}
+}

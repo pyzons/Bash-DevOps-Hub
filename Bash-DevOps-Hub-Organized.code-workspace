@@ -1,0 +1,54 @@
+{
+    "folders": [
+        {
+            "name": "🚀 Installation",
+            "path": "./01-installation"
+        },
+        {
+            "name": "🐚 Bash Profile",
+            "path": "./02-bash-profile"
+        },
+        {
+            "name": "⭐ Prompt & Theming",
+            "path": "./03-prompt-theming"
+        },
+        {
+            "name": "🔧 Dev Tools",
+            "path": "./04-dev-tools"
+        },
+        {
+            "name": "🐳 Docker Integration",
+            "path": "./05-docker-integration"
+        },
+        {
+            "name": "☸️ Kubernetes",
+            "path": "./06-kubernetes-integration"
+        },
+        {
+            "name": "📚 Documentation",
+            "path": "./07-documentation"
+        },
+        {
+            "name": "🗄️ Legacy Archive",
+            "path": "./08-legacy-archive"
+        },
+        {
+            "name": "Root",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/backup-*": true,
+            "**/.git": false
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-vscode.vscode-json",
+            "redhat.vscode-yaml",
+            "ms-azuretools.vscode-docker",
+            "ms-kubernetes-tools.vscode-kubernetes-tools"
+        ]
+    }
+}
