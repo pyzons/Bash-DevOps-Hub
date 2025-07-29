@@ -1,11 +1,30 @@
 # PowerShell 7 Profile Enhancements
 # This file contains recommended optimizations for your PowerShell 7 setup
 
-# Import posh-git for Git integration in prompt (if available)
-try {
-    Import-Module posh-git -ErrorAction Stop
-} catch {
-    Write-Warning "posh-git module not available. Install with: Install-Module posh-git -Scope CurrentUser"
+# Initialize Oh My Posh (if available)
+if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
+    try {
+        oh-my-posh init pwsh | Invoke-Expression
+        $ohMyPoshEnabled = $true
+        
+        # Create omp alias for convenience
+        Set-Alias -Name omp -Value oh-my-posh
+    } catch {
+        Write-Warning "Oh My Posh initialization failed: $($_.Exception.Message)"
+        $ohMyPoshEnabled = $false
+    }
+} else {
+    Write-Warning "Oh My Posh not found. Install with: winget install JanDeDobbeleer.OhMyPosh"
+    $ohMyPoshEnabled = $false
+}
+
+# Import posh-git for Git integration in prompt (if available and Oh My Posh not enabled)
+if (-not $ohMyPoshEnabled) {
+    try {
+        Import-Module posh-git -ErrorAction Stop
+    } catch {
+        Write-Warning "posh-git module not available. Install with: Install-Module posh-git -Scope CurrentUser"
+    }
 }
 
 # Enhanced PSReadLine configuration (if supported)
@@ -366,32 +385,35 @@ function K8s-Status {
     kubectl get all
 }
 
-# Enhanced prompt (optional - remove if you use Oh My Posh)
-function prompt {
-    $location = Get-Location
-    $gitInfo = ""
-    
-    # Try to get git status if posh-git is available
-    try {
-        if (Get-Command Write-VcsStatus -ErrorAction SilentlyContinue) {
-            $gitInfo = " $(Write-VcsStatus)"
-        }
-    } catch {
-        # Fallback - just show git branch if we're in a git repo
+# Enhanced prompt (only used if Oh My Posh is not available)
+if (-not $ohMyPoshEnabled) {
+    function prompt {
+        $location = Get-Location
+        $gitInfo = ""
+        
+        # Try to get git status if posh-git is available
         try {
-            $branch = git branch --show-current 2>$null
-            if ($branch) {
-                $gitInfo = " [$branch]"
+            if (Get-Command Write-VcsStatus -ErrorAction SilentlyContinue) {
+                $gitInfo = " $(Write-VcsStatus)"
             }
         } catch {
-            # No git or not in a git repo
+            # Fallback - just show git branch if we're in a git repo
+            try {
+                $branch = git branch --show-current 2>$null
+                if ($branch) {
+                    $gitInfo = " [$branch]"
+                }
+            } catch {
+                # No git or not in a git repo
+            }
         }
+        
+        "PS $location$gitInfo> "
     }
-    
-    "PS $location$gitInfo> "
 }
 
-Write-Host "PowerShell 7 with Docker & Kubernetes Integration Loaded!" -ForegroundColor Green
+$promptInfo = if ($ohMyPoshEnabled) { "with Oh My Posh" } else { "with Custom Prompt" }
+Write-Host "PowerShell 7 with Docker & Kubernetes Integration Loaded $promptInfo!" -ForegroundColor Green
 Write-Host "💡 Available commands:" -ForegroundColor Cyan
 Write-Host "• Show-GitAliases        - Git shortcuts" -ForegroundColor Gray
 Write-Host "• Show-DockerAliases     - Docker commands" -ForegroundColor Gray
