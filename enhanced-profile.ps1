@@ -204,6 +204,60 @@ function Check-DockerReady {
     }
 }
 
+function Resume-Work {
+    Write-Host "🚀 Resuming Development Environment..." -ForegroundColor Cyan
+    Write-Host ""
+    
+    # Navigate to workspace
+    Set-Location "c:\app\ws"
+    Write-Host "📁 Workspace: $(Get-Location)" -ForegroundColor Yellow
+    
+    # Check Docker
+    if (Check-DockerReady) {
+        Write-Host ""
+        
+        # Check Git status
+        Write-Host "📊 Git Status:" -ForegroundColor Yellow
+        $gitStatus = git status --porcelain
+        if ($gitStatus) {
+            Write-Host "⚠️ Uncommitted changes detected" -ForegroundColor Orange
+            git status --short
+        } else {
+            Write-Host "✅ Git working directory clean" -ForegroundColor Green
+        }
+        
+        # Check KIND clusters
+        Write-Host ""
+        Write-Host "☸️ KIND Clusters:" -ForegroundColor Yellow
+        $clusters = kind get clusters 2>$null
+        if ($clusters) {
+            Write-Host "✅ Active clusters: $($clusters -join ', ')" -ForegroundColor Green
+            Write-Host "💡 Run K8s-Status to see details" -ForegroundColor Cyan
+        } else {
+            Write-Host "❌ No KIND clusters running" -ForegroundColor Red
+            Write-Host "💡 Run kind-dev-setup to create development cluster" -ForegroundColor Cyan
+        }
+        
+        # Check backups
+        Write-Host ""
+        Write-Host "💾 Available Backups:" -ForegroundColor Yellow
+        $backupDir = "c:\app\ws\k8s-backups"
+        if (Test-Path $backupDir) {
+            $backups = Get-ChildItem $backupDir -Filter "*.yaml" | Sort-Object LastWriteTime -Descending | Select-Object -First 3
+            if ($backups) {
+                foreach ($backup in $backups) {
+                    Write-Host "  📄 $($backup.Name) ($(($backup.LastWriteTime).ToString('MM/dd HH:mm')))" -ForegroundColor White
+                }
+            } else {
+                Write-Host "  No backups found" -ForegroundColor Gray
+            }
+        }
+        
+        Write-Host ""
+        Write-Host "🎯 Ready to continue! Use K8s-QuickStart for workflow reminders." -ForegroundColor Green
+    }
+}
+
 # Advanced Kubernetes functions
 function Show-KubernetesAliases {
     Write-Host "Available Kubernetes & KIND Aliases:" -ForegroundColor Green
@@ -236,6 +290,7 @@ function Show-KubernetesAliases {
     Write-Host "kind-restore-resources - Restore resources from backup file" -ForegroundColor White
     Write-Host "kind-cleanup-all    - Delete all KIND clusters" -ForegroundColor White
     Write-Host "Check-DockerReady   - Verify Docker Desktop is running" -ForegroundColor White
+    Write-Host "Resume-Work         - Complete environment status and resume guide" -ForegroundColor White
 }
 
 function K8s-QuickStart {
@@ -285,3 +340,4 @@ Write-Host "• Show-KubernetesAliases - Kubernetes & KIND shortcuts" -Foregroun
 Write-Host "• K8s-QuickStart         - Kubernetes quick start guide" -ForegroundColor Gray
 Write-Host "• Check-DockerReady      - Verify Docker status" -ForegroundColor Gray
 Write-Host "• kind-dev-setup         - Create development cluster" -ForegroundColor Gray
+Write-Host "• Resume-Work            - Complete environment status check" -ForegroundColor Gray
