@@ -58,6 +58,49 @@ function gco { git checkout $args }
 # Useful aliases for common commands
 Set-Alias -Name ll -Value Get-ChildItem
 function la { Get-ChildItem -Force $args }
+
+# Remove built-in ls alias to avoid conflicts
+Remove-Item Alias:ls -Force -ErrorAction SilentlyContinue
+
+# Create ls-ah alias for detailed listing of all files including hidden
+function ls-ah { 
+    param([string[]]$Path = ".")
+    Get-ChildItem -Path $Path -Force | Format-Table Mode, LastWriteTime, Length, Name -AutoSize 
+}
+
+# Create lsah alias (same functionality as ls-ah)
+function lsah { 
+    param([string[]]$Path = ".")
+    Get-ChildItem -Path $Path -Force | Format-Table Mode, LastWriteTime, Length, Name -AutoSize 
+}
+
+# Enhanced ls function with Unix-like parameters
+function ls {
+    param(
+        [switch]$a,     # Show all files (including hidden)
+        [switch]$h,     # Show in human-readable format with details
+        [switch]$ah,    # Show all files with details (combination of -a and -h)
+        [string[]]$Path = "."
+    )
+    
+    if ($ah) {
+        # Show all files (including hidden) with detailed formatting - same as ls-ah
+        Get-ChildItem -Path $Path -Force | Format-Table Mode, LastWriteTime, Length, Name -AutoSize
+    }
+    elseif ($a) {
+        # Show all files including hidden
+        Get-ChildItem -Path $Path -Force
+    }
+    elseif ($h) {
+        # Show with detailed formatting
+        Get-ChildItem -Path $Path | Format-Table Mode, LastWriteTime, Length, Name -AutoSize
+    }
+    else {
+        # Default behavior
+        Get-ChildItem -Path $Path
+    }
+}
+
 function .. { Set-Location .. }
 function ... { Set-Location ../.. }
 
