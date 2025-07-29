@@ -1,0 +1,66 @@
+{
+    "terminal.integrated.defaultProfile.windows": "PowerShell 7",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell 7": {
+            "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+            "icon": "terminal-powershell",
+            "args": [
+                "-NoLogo",
+                "-NoExit"
+            ]
+        },
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        }
+    },
+    "terminal.integrated.shellIntegration.enabled": true,
+    "terminal.integrated.enablePersistentSessions": true,
+    "terminal.integrated.persistentSessionReviveProcess": "onExit",
+    "terminal.integrated.rightClickBehavior": "copyPaste",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.fontFamily": "Cascadia Code, Consolas, 'Courier New', monospace",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.lineHeight": 1.2,
+    "powershell.powerShellDefaultVersion": "C:\\Program Files\\PowerShell\\7\\pwsh.exe", 
+    "powershell.powerShellAdditionalExePaths": {
+        "PowerShell 7.5.2": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+    },
+    "powershell.integratedConsole.showOnStartup": false,
+    "powershell.integratedConsole.suppressStartupBanner": true,
+    "powershell.enableProfileLoading": true,
+    "powershell.promptToUpdatePowerShell": false,
+    "powershell.codeFormatting.preset": "OTBS",
+    "powershell.codeFormatting.openBraceOnSameLine": true,
+    "powershell.codeFormatting.newLineAfterOpenBrace": true,
+    "powershell.codeFormatting.newLineAfterCloseBrace": true,
+    "powershell.codeFormatting.whitespaceBeforeOpenBrace": true,
+    "powershell.codeFormatting.whitespaceBeforeOpenParen": true,
+    "powershell.codeFormatting.whitespaceAroundOperator": true,
+    "powershell.codeFormatting.whitespaceAfterSeparator": true,
+    "powershell.codeFormatting.ignoreOneLineBlock": true,
+    "powershell.scriptAnalysis.enable": true,
+    "powershell.scriptAnalysis.settingsPath": "",
+    "powershell.debugging.createTemporaryIntegratedConsole": false,
+    "files.associations": {
+        "*.ps1": "powershell",
+        "*.psm1": "powershell",
+        "*.psd1": "powershell"
+    },
+    "files.defaultLanguage": "powershell",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.autofetchPeriod": 180,
+    "git.fetchOnPull": true,
+    "git.pruneOnFetch": true,
+    "git.showPushSuccessNotification": true,
+    "git.terminalAuthentication": true,
+    "git.useIntegratedTerminal": true,
+    "scm.diffDecorations": "all",
+    "scm.alwaysShowRepositories": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "merge-conflict.autoNavigateNextConflict.enabled": true,
+    "terminal.integrated.inheritEnv": true
+}

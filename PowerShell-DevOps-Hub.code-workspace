@@ -8,7 +8,7 @@
 		"terminal.integrated.defaultProfile.windows": "PowerShell 7",
 		"terminal.integrated.profiles.windows": {
 			"PowerShell 7": {
-				"path": "pwsh.exe",
+				"path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
 				"icon": "terminal-powershell",
 				"args": [
 					"-NoLogo",
@@ -29,7 +29,10 @@
 		"terminal.integrated.fontFamily": "Cascadia Code, Consolas, 'Courier New', monospace",
 		"terminal.integrated.fontSize": 14,
 		"terminal.integrated.lineHeight": 1.2,
-		"powershell.powerShellDefaultVersion": "PowerShell 7",
+		"powershell.powerShellDefaultVersion": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+		"powershell.powerShellAdditionalExePaths": {
+			"PowerShell 7.5.2": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+		},
 		"powershell.integratedConsole.showOnStartup": false,
 		"powershell.integratedConsole.suppressStartupBanner": true,
 		"powershell.enableProfileLoading": true,
