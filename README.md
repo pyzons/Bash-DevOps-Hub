@@ -1,6 +1,6 @@
 # 🚀 Bash DevOps Hub
 
-A comprehensive, well-organized Bash development environment with Git, Docker, and Kubernetes integration.
+A comprehensive, cross-platform development environment with Git, Docker, and Kubernetes integration. Provides identical experiences across bash (Linux/WSL2) and PowerShell 7 (Windows 11).
 
 ## 🏗️ Project Structure
 
@@ -33,28 +33,63 @@ A comprehensive, well-organized Bash development environment with Git, Docker, a
 │   └── chat-ai/                 # AI chat context preservation
 ├── 08-legacy-archive/           # Legacy Archive
 │   └── powershell-legacy/       # Archived PowerShell files
+├── 09-chat-recovery/            # Chat Recovery & Context Preservation
+│   ├── CHAT-RECOVERY-INSTRUCTIONS.md  # Main recovery guide
+│   ├── COMPLETE-CHAT-HISTORY.md       # Full conversation history
+│   ├── POWERSHELL7-RECOVERY-GUIDE.md  # PowerShell 7 specific recovery
+│   └── WSL2-SETUP-GUIDE.md            # WSL2 setup instructions
+├── 10-powershell-integration/   # PowerShell 7 Cross-Platform Setup
+│   ├── installers/              # PowerShell installation scripts
+│   ├── configs/                 # Starship and profile configurations
+│   └── docs/                    # PowerShell-specific documentation
 └── README.md                    # This file
 ```
 
+## 🎯 Cross-Platform Support
+
+- ✅ **Linux/Ubuntu** - Native bash environment
+- ✅ **WSL2 Windows 11** - Linux compatibility with Windows integration  
+- ✅ **PowerShell 7 Windows 11** - Native Windows with identical functionality
+- ✅ **Cloud Ubuntu** - Remote development environments
+
 ## 🚀 Quick Start
 
-1. **Install the enhanced bash profile:**
-   ```bash
-   cd 01-installation/installers
-   ./install-no-hang.sh
-   ```
+### Bash (Linux/WSL2):
+```bash
+# Clone repository
+git clone https://github.com/pyzons/Bash-DevOps-Hub.git
+cd Bash-DevOps-Hub
 
-2. **Restart your terminal or:**
-   ```bash
-   source ~/.bashrc
-   ```
+# Install enhanced profile
+cd 01-installation/installers
+./install-no-hang.sh
 
-3. **Test the installation:**
-   ```bash
-   gs          # Git status
-   ll          # List files
-   show-git-aliases  # See all shortcuts
-   ```
+# WSL2 optimization (if on Windows)
+./optimize-wsl2.sh
+```
+
+### PowerShell 7 (Windows 11):
+```powershell
+# One-command installation
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/pyzons/Bash-DevOps-Hub/main/10-powershell-integration/installers/setup-powershell7-starship.ps1'))
+```
+
+### Test Your Installation:
+```bash
+# Bash testing
+gs               # Git status
+ll               # Enhanced directory listing
+show-git-aliases # View all shortcuts
+wsl2-status      # WSL2 environment check (if applicable)
+```
+
+```powershell
+# PowerShell 7 testing
+gs               # Git status (identical to bash)
+ll               # Enhanced directory listing
+show-git-aliases # View all shortcuts
+pwsh-status      # PowerShell environment check
+```
 
 ## 📋 Sub-Projects Overview
 
